@@ -1,20 +1,16 @@
 import React from 'react'
+import './player.css';
+import { Paper, Typography } from '@material-ui/core';
 
-export const Player = (props) => {
-    const [name, setName] = React.useState(props.name);
+export const Player = (props) => {    
     return (
-        <div>
-            <div>
-                Player {props.id} {props.name} {props.score}
-            </div>
-            {props.name
-                ? (<div> {name}</div>)
-                : (<>
-                    <input type="text" value={name} onChange={
-                        (e) => setName(e.target.value)
-                    }></input>
-                    <button onClick={()=> props.onNameSaved(name)}>Pass name</button>
-                </>)}
-        </div>
+        <Paper className="player-card" elevation={3}>
+            <Typography variant="h3" component="h3" gutterBottom className="title">
+                {props.name}
+            </Typography>
+            <Typography variant="h4" component="h5" gutterBottom className="score">
+                Score: {props.score}
+            </Typography>
+        </Paper>        
     )
 }

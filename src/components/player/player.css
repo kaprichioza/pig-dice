@@ -1,0 +1,34 @@
+.player-card {
+  width: 100%;
+  height: 100%;
+  background-image: url("http://storage.kameleoon.eu/tfw/pig.png");
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.player-container .title,
+.player-container .score {
+  color: #0096b9;
+  padding: 20px;
+  font-weight: 700;
+}
+.player-container .score {
+  text-align-last: justify;
+  color: #00a485;
+  font-weight: 700;
+}
+@media screen and (max-width: 768px) {
+  .player-card {
+    background-image: none;
+  }
+  .player-container .title {
+    font-size: 26px;
+  }
+  .player-container .score {
+    font-size: 20px;
+  }
+  .player-container .title,
+  .player-container .score {
+    padding: 8px 15px;
+  }
+}

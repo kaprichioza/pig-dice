@@ -1,0 +1,29 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+.dice {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 16px;
+    padding: 20px 0;
+}
+.left-dice {
+    width: 15%;
+}
+.left-dice img,
+.right-dice img {
+    width: 100%;
+}
+.right-dice {   
+    width: 15%; 
+    margin-left: 10%;   
+}
+.currentScore {
+    font-weight: 700 !important;    
+    line-height: 30px;
+    color: #3d807b;
+  }
