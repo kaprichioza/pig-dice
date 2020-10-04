@@ -41,7 +41,7 @@
 }
 div > .button {
     background-color: #00a485;
-    color: white;
+    color: white !important;
     border-radius: 4px;
 }
 div > .button:hover {
@@ -49,6 +49,9 @@ div > .button:hover {
 }
 .data-container .game-context {
     padding-left: 0;
+}
+.MuiButton-root.Mui-disabled {
+    opacity: 0.6;
 }
 @media screen and (max-width: 768px) {
     .data-container .button-hold {

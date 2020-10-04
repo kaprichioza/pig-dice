@@ -7,7 +7,7 @@ export const GameData = (props) => {
     return (
         <div className="data-container">
             <div className="rules">
-                <div className="">
+                <div className="accordion">
                     <Accordion>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
@@ -32,7 +32,7 @@ export const GameData = (props) => {
                 </div>
             </div>
             <div className="button-hold">
-                <Button className="button" variant="contained" color="primary">
+                <Button className="button" variant="contained" color="primary" onClick={props.onHoldScore} disabled={props.holdDisabled}>
                     Hold
             </Button>
             </div>

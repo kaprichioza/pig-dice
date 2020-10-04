@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './game.css';
 import { Player } from '../player/player';
-import { Typography } from '@material-ui/core';
 import { Field } from '../field/field';
 import { generateRandomNumber } from '../../utils/math';
 import { GameData } from '../gameData/gameData';
@@ -9,14 +8,14 @@ import { GameData } from '../gameData/gameData';
 export const Game = () => {
     const [appState, setAppState] = React.useState({
         player1: {
-            id: 1,
             name: 'Player',
             score: 0,
+            isActive: true,
         },
         player2: {
-            id: 2,
             score: 0,
             name: 'AI',
+            isActive: false,
         },
         current: {
             total: 0,
@@ -26,42 +25,76 @@ export const Game = () => {
         gameHistory: {
             wins: 0,
             loses: 0,
-        }
+        },
     });
+    const disabledHold = (appState.player2.isActive || appState.current.total === 0);
     const { current: { total, leftDice, rightDice } } = appState
     const calcDiceThrow = () => {
         const first = generateRandomNumber(1, 6);
         const second = generateRandomNumber(1, 6);
         const nextTotal = total + first + second;
+        appState.current.leftDice = `http://storage.kameleoon.eu/tfw/dice-${first}-md.png`;
+        appState.current.rightDice = `http://storage.kameleoon.eu/tfw/dice-${second}-md.png`;
+        appState.current.total = nextTotal;
+        saveState();
+        if (first === 1 || second === 1) {
+            changePlayer();
+        }
+    }
+    useEffect(() => {
+        if (appState.player1.isActive) return;
+        setTimeout(() => {
+            if (appState.current.total >= 21) {
+                pushScore()
+            }
+            else {
+                calcDiceThrow();
+            }
+        }, 3000);
+    }, [appState.player1.isActive, appState.current.total]);
+    const pushScore = () => {
+        const activePlayer = appState.player1.isActive ? 'player1' : 'player2';
+        const newScore = appState[activePlayer].score + appState.current.total;
+        appState[activePlayer].score = newScore;
+        changePlayer();
+    }
+    function changePlayer() {
+        appState.player1.isActive = !appState.player1.isActive;
+        appState.player2.isActive = !appState.player2.isActive;
+        saveState();
+        clearTotal();
+    }
+    function clearTotal() {
+        appState.current.total = 0;
+        saveState();
+    }
+    function saveState() {
         setAppState({
-            ...appState, current: {
-                total: nextTotal,
-                leftDice: `http://storage.kameleoon.eu/tfw/dice-${first}-md.png`,
-                rightDice: `http://storage.kameleoon.eu/tfw/dice-${second}-md.png`,
-            },
+            ...appState
         });
     }
     return (
         <main className="wrapper">
             <div className="player-container">
                 <div className="first-player">
-                    <Player id={appState.player1.id}
-                        score={appState.player1.score}
+                    <Player score={appState.player1.score}
                         name={appState.player1.name} />
                 </div>
                 <Field total={total}
                     leftDice={leftDice}
                     rightDice={rightDice}
                     onDiceThrown={calcDiceThrow}
+                    canNotThrow={appState.player2.isActive}
                 />
                 <div className="second-player">
-                    <Player id={appState.player2.id}
-                        score={appState.player2.score}
+                    <Player score={appState.player2.score}
                         name={appState.player2.name} />
                 </div>
             </div>
             <GameData wins={appState.gameHistory.wins}
                 loses={appState.gameHistory.loses}
+                onHoldScore={pushScore}
+                holdDisabled={disabledHold}
             />
         </main>
     );

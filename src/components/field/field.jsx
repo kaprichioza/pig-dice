@@ -15,7 +15,7 @@ export const Field = (props) => {
                     <img src={props.rightDice} alt="dice"></img>
                 </div>
             </div>
-            <Button onClick={props.onDiceThrown} className="button">Throw The Dice</Button>
+            <Button onClick={props.onDiceThrown} disabled={props.canNotThrow} className="button">Throw The Dice</Button>
         </div>
     )
 }
