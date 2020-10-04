@@ -2,6 +2,7 @@ import React from 'react'
 import './gameData.css';
 import { Accordion, AccordionDetails, AccordionSummary, Button, Paper, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { toast } from 'react-toastify';
 
 export const GameData = (props) => {
     return (
@@ -14,10 +15,10 @@ export const GameData = (props) => {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <Typography  variant="h5" component="h6">Rules</Typography>
+                            <Typography variant="h5" component="h6">Rules</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <Typography  component="h6">
+                            <Typography component="h6">
                                 <p><b>Step 1: </b>
                     Roll two dice for your first turn.<br /></p>
                                 <p><b>Step 2: </b>
@@ -26,7 +27,7 @@ export const GameData = (props) => {
                     Continue rolling the die until you're happy with the number of points you've scored. Then, "hold" by handing the die over to your opponent, and track all points earned during your turn.<br /></p>
                                 <p><b>Step 4: </b>
                     Reach 100 points first and win the game.</p>
-            </Typography>
+                            </Typography>
                         </AccordionDetails>
                     </Accordion>
                 </div>

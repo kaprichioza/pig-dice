@@ -4,29 +4,33 @@ import { Player } from '../player/player';
 import { Field } from '../field/field';
 import { generateRandomNumber } from '../../utils/math';
 import { GameData } from '../gameData/gameData';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Modal } from '@material-ui/core';
 
+const initialAppState = {
+    player1: {
+        name: 'Player',
+        score: 0,
+        isActive: true,
+    },
+    player2: {
+        score: 0,
+        name: 'AI',
+        isActive: false,
+    },
+    current: {
+        total: 0,
+        leftDice: 'http://storage.kameleoon.eu/tfw/dice-6-md.png',
+        rightDice: 'http://storage.kameleoon.eu/tfw/dice-6-md.png',
+    },
+    gameHistory: {
+        wins: 0,
+        loses: 0,
+    },
+};
 export const Game = () => {
-    const [appState, setAppState] = React.useState({
-        player1: {
-            name: 'Player',
-            score: 0,
-            isActive: true,
-        },
-        player2: {
-            score: 0,
-            name: 'AI',
-            isActive: false,
-        },
-        current: {
-            total: 0,
-            leftDice: 'http://storage.kameleoon.eu/tfw/dice-6-md.png',
-            rightDice: 'http://storage.kameleoon.eu/tfw/dice-6-md.png',
-        },
-        gameHistory: {
-            wins: 0,
-            loses: 0,
-        },
-    });
+    const [appState, setAppState] = React.useState(JSON.parse(JSON.stringify(initialAppState)));
     const disabledHold = (appState.player2.isActive || appState.current.total === 0);
     const { current: { total, leftDice, rightDice } } = appState
     const calcDiceThrow = () => {
@@ -50,13 +54,14 @@ export const Game = () => {
             else {
                 calcDiceThrow();
             }
-        }, 3000);
+        }, 500);
     }, [appState.player1.isActive, appState.current.total]);
     const pushScore = () => {
         const activePlayer = appState.player1.isActive ? 'player1' : 'player2';
         const newScore = appState[activePlayer].score + appState.current.total;
         appState[activePlayer].score = newScore;
         changePlayer();
+        checkScore();
     }
     function changePlayer() {
         appState.player1.isActive = !appState.player1.isActive;
@@ -72,6 +77,20 @@ export const Game = () => {
         setAppState({
             ...appState
         });
+    }
+    function checkScore() {
+        debugger;
+        if (appState.player1.score >= 100) {
+            toast.success('U won');
+            handleModalClose();
+        }
+        if (appState.player2.score >= 100) {
+            toast.error('U lose');
+            handleModalClose();
+        }
+    }
+    const handleModalClose = () => {
+        setAppState(initialAppState);
     }
     return (
         <main className="wrapper">
@@ -96,6 +115,13 @@ export const Game = () => {
                 onHoldScore={pushScore}
                 holdDisabled={disabledHold}
             />
+            <ToastContainer position="top-center"
+                autoClose={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable />
         </main>
     );
 }
