@@ -42,8 +42,7 @@ export const GameData = (props) => {
                     <div className="container">
                         <div className="count-wins">Wins: {props.wins}</div>
                         <div className="count-lose">Loses: {props.loses}</div>
-                    </div>
-                    <Button className="button">Start Game</Button>
+                    </div>                   
                 </Paper>
             </div>
         </div>

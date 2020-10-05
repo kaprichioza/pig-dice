@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './game.css';
 import { Player } from '../player/player';
 import { Field } from '../field/field';
@@ -6,8 +6,8 @@ import { generateRandomNumber } from '../../utils/math';
 import { GameData } from '../gameData/gameData';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Modal } from '@material-ui/core';
-
+const wins = () => { return window.sessionStorage.getItem('wins') || 0 }
+const loses = () => { return window.sessionStorage.getItem('loses') || 0 };
 const initialAppState = {
     player1: {
         name: 'Player',
@@ -25,10 +25,11 @@ const initialAppState = {
         rightDice: 'http://storage.kameleoon.eu/tfw/dice-6-md.png',
     },
     gameHistory: {
-        wins: 0,
-        loses: 0,
+        wins: wins(),
+        loses: loses(),
     },
 };
+
 export const Game = () => {
     const [appState, setAppState] = React.useState(JSON.parse(JSON.stringify(initialAppState)));
     const disabledHold = (appState.player2.isActive || appState.current.total === 0);
@@ -78,19 +79,22 @@ export const Game = () => {
             ...appState
         });
     }
-    function checkScore() {
-        debugger;
+    function checkScore() {        
         if (appState.player1.score >= 100) {
             toast.success('U won');
-            handleModalClose();
+            window.sessionStorage.setItem('wins', ++appState.gameHistory.wins);
+            ++initialAppState.gameHistory.wins;
+            handleModalClose();           
         }
         if (appState.player2.score >= 100) {
             toast.error('U lose');
-            handleModalClose();
+            window.sessionStorage.setItem('loses', ++appState.gameHistory.loses);
+            ++initialAppState.gameHistory.loses;
+            handleModalClose();                       
         }
     }
-    const handleModalClose = () => {
-        setAppState(initialAppState);
+    const handleModalClose = () => {        
+        setAppState(JSON.parse(JSON.stringify(initialAppState)));        
     }
     return (
         <main className="wrapper">
