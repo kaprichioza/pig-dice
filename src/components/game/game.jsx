@@ -14,7 +14,7 @@ export const Game = () => {
     game.init(state, setState);
     const { pushScore, calcDiceThrow, appState } = game;
     const disabledHold = (appState.player2.isActive || appState.current.total === 0);
-    const { current: { total, leftDice, rightDice } } = appState;
+    const { current: { total, leftDice, rightDice }, player1, player2, gameHistory: { wins, loses} } = appState;   
 
     useEffect(() => {
         if (appState.player1.isActive) return;
@@ -26,28 +26,28 @@ export const Game = () => {
                 calcDiceThrow();
             }
         }, 1000);
-    }, [appState.player1.isActive, appState.current.total]);
+    }, [player1.isActive, total]);
 
     return (
         <main className="wrapper">
             <div className="player-container">
                 <div className="first-player">
-                    <Player score={appState.player1.score}
-                        name={appState.player1.name} />
+                    <Player score={player1.score}
+                        name={player1.name} />
                 </div>
                 <Field total={total}
                     leftDice={leftDice}
                     rightDice={rightDice}
                     onDiceThrown={calcDiceThrow}
-                    canNotThrow={appState.player2.isActive}
+                    canNotThrow={player2.isActive}
                 />
                 <div className="second-player">
-                    <Player score={appState.player2.score}
-                        name={appState.player2.name} />
+                    <Player score={player2.score}
+                        name={player2.name} />
                 </div>
             </div>
-            <GameData wins={appState.gameHistory.wins}
-                loses={appState.gameHistory.loses}
+            <GameData wins={wins}
+                loses={loses}
                 onHoldScore={pushScore}
                 holdDisabled={disabledHold}
             />
