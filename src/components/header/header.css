@@ -1,0 +1,17 @@
+.header {
+    background-color: #00a485;
+    color: #fff;
+    font-family: "Open Sans", sans-serif;
+    width: 100%;
+  }
+  .title {
+    text-align: center;
+    padding: 20px;
+  }
+  @media screen and (max-width: 768px) {
+    .container .title {
+      padding: 20px;
+      line-height: 30px;
+      font-size: 26px;
+    }
+  }
