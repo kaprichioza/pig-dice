@@ -2,7 +2,6 @@ import React from 'react'
 import './gameData.css';
 import { Accordion, AccordionDetails, AccordionSummary, Button, Paper, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { toast } from 'react-toastify';
 
 export const GameData = (props) => {
     return (

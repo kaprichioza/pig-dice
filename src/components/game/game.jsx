@@ -6,7 +6,7 @@ import { GameData } from '../gameData/gameData';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getInitialAppState } from './app-initial-state';
-import { GameDice } from './game';
+import { GameDice } from './game-dice';
 
 export const Game = () => { 
     const [state, setState] = React.useState(getInitialAppState());

@@ -1,11 +1,10 @@
 
-import { generateRandomNumber } from './../../utils/math';
+import { generateRandomNumber } from '../../utils/math';
 import { toast } from 'react-toastify';
 import { getInitialAppState } from './app-initial-state';
 
 
-export class GameDice {
-    constructor() { }
+export class GameDice {    
     init = (state, setState) => {
         this.appState = state;
         this.setState = setState;
