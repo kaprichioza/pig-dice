@@ -6,11 +6,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # market-demo
 
 Для запуска проекта необходимо выполнить следующие действия:
-- клонировать репозиторий: `https://github.com/kaprichioza/market.git`
+- клонировать репозиторий: [https://github.com/kaprichioza/market.git](https://github.com/kaprichioza/market.git)
 - выполнить установку пакетов: `npm install`
 - запустить сервер: `npm run backend`
 - запустить проект: открыть дополнителньый терминал и выполнить `npm start`
-- открыть в браузере следующий адрес: `http://localhost:3000/`
+- открыть в браузере следующий адрес: [http://localhost:3000/](http://localhost:3000/)
 
 ## Available Scripts
 
