@@ -1,7 +1,6 @@
 # pig-dice
 Game pig-dice
 Open [https://game-pig-dice.herokuapp.com/](https://game-pig-dice.herokuapp.com/) to view it in the browser.
-- [ ] r
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## Available Scripts
 
