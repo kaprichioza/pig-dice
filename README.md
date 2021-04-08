@@ -2,7 +2,6 @@
 Game pig-dice
 Open [https://game-pig-dice.herokuapp.com/](https://game-pig-dice.herokuapp.com/) to view it in the browser.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-- [x] [DONE ISSUE](https://github.com/azu/github-project-todo-md/issues/5)
 ## Available Scripts
 
 In the project directory, you can run:
