@@ -26,7 +26,7 @@ export const Game = () => {
                 calcDiceThrow();
             }
         }, 1000);
-    }, [player1.isActive, total]);
+    }, [appState, calcDiceThrow, player1.isActive, pushScore, total]);
 
     return (
         <main className="wrapper">
